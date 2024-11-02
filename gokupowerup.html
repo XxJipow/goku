@@ -1,0 +1,834 @@
+<html>
+<head>
+<title>Goku</title>
+<link rel="icon" href="pfp.png" type="image/x-icon">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://dragonballz.universe/images/namek-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#goku {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+#kamehameha {
+    position: absolute;
+    width: 0;
+    height: 100px;
+    background: linear-gradient(90deg, #87CEFA, #1E90FF);
+    border-radius: 50px;
+    opacity: 0;
+    transition: width 0.5s, opacity 0.5s;
+    left: 50%;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 10;
+}
+
+.powering-up {
+    animation: powerUp 0.5s infinite alternate;
+}
+
+@keyframes powerUp {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.super-saiyan-aura {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+.kaioken-aura {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -2;
+}
+
+.super-saiyan-god-aura {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -3;
+}
+
+.super-saiyan-blue-aura {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(0,100,255,0.8) 0%, rgba(0,0,255,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -4;
+}
+
+.super-saiyan-blue-evolution-aura {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    background: radial-gradient(ellipse at center, rgba(0,128,255,0.8) 0%, rgba(0,64,255,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -5;
+}
+
+.ultra-instinct-aura {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -6;
+}
+
+.ultra-instinct-particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    pointer-events: none;
+}
+
+.instructions {
+    position: absolute;
+    bottom: 20px;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(149, 22, 222, 0.5);
+}
+
+.explosion {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+@keyframes explode {
+    0% { transform: translateY(-50%) scale(0.1); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-50%) scale(2); opacity: 0; }
+}
+
+.power-level {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 2px 4px rgba(117, 44, 226, 0.781);
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.electric-particle {
+    position: absolute;
+    background: #00FFFF;
+    width: 2px;
+    height: 10px;
+    pointer-events: none;
+}
+
+.ultra-instinct-particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.8;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes particleAnimation {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes electricParticleAnimation {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+        opacity: 0;
+    }
+}
+
+@keyframes ultraInstinctParticleAnimation {
+    0% {
+        transform: translate(0, 0) scale(0.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(3);
+        opacity: 0;
+    }
+}
+</style></head><body>
+<div id="goku">
+    <svg width="200" height="300" viewBox="0 0 200 300">
+        ${isSuperSaiyan3 ? `<path d="M70 40 Q100 -50 130 40 L100 300 Q130 150 160 300 M40 40 Q70 -50 100 40 L70 300" fill="${hairColor}" />` : ''}
+        <path d="${bodyPath}" fill="${skinColor}"/>
+        ${shoulders}
+        <circle cx="100" cy="${40 - headOffset}" r="${isJacked ? 35 : 30}" fill="${faceColor}"/>
+        ${!isSuperSaiyan3 ? `<path d="${hairStyle}" fill="${hairColor}"/>` : ''}
+        <circle cx="90" cy="${35 - headOffset}" r="5" fill="${eyeColor}"/>
+        <circle cx="110" cy="${35 - headOffset}" r="5" fill="${eyeColor}"/>
+        <path d="M95 ${50 - headOffset} Q100 ${55 - headOffset} 105 ${50 - headOffset}" fill="none" stroke="#000000" stroke-width="2"/>
+        ${armStyle}
+        <path d="M90 ${190 + bodyOffset} Q85 240 80 290" fill="none" stroke="${pantsColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        <path d="M110 ${190 + bodyOffset} Q115 240 120 290" fill="none" stroke="${pantsColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        ${(isSuperSaiyan2 || isSuperSaiyan3) ? '<path d="M60 30 L70 40 M140 30 L130 40" stroke="' + hairColor + '" stroke-width="2"/>' : ''}
+    </svg>
+</div>
+<div id="kamehameha"></div>
+<div class="super-saiyan-aura"></div>
+<div class="kaioken-aura"></div>
+<div class="super-saiyan-god-aura"></div>
+<div class="super-saiyan-blue-aura"></div>
+<div class="super-saiyan-blue-evolution-aura"></div>
+<div class="ultra-instinct-aura"></div>
+<div class="explosion">
+    <svg width="300" height="300" viewBox="0 0 300 300">
+        <circle cx="150" cy="150" r="150" fill="url(#explosionGradient)">
+            <animate attributeName="r" values="0;150" dur="0.5s" repeatCount="1" />
+        </circle>
+        <defs>
+            <radialGradient id="explosionGradient">
+                <stop offset="0%" stop-color="#E6FFFF" />
+                <stop offset="25%" stop-color="#B3E0FF" />
+                <stop offset="50%" stop-color="#80C1FF" />
+                <stop offset="75%" stop-color="#4DA3FF" />
+                <stop offset="100%" stop-color="#1E90FF" stop-opacity="0" />
+            </radialGradient>
+        </defs>
+    </svg>
+</div>
+<div class="instructions">Press SPACE to unleash Kamehameha! Press G to toggle Super Saiyan or Mastered Ultra Instinct! Press H to toggle Super Saiyan 2 or Super Saiyan Blue Evolution! Press K to toggle Kaioken! Press J to toggle Jacked Mode! Press F to toggle Super Saiyan 3! Press C to toggle Super Saiyan God! Press B to toggle Super Saiyan Blue! Press V to toggle Ultra Instinct! Press R to toggle Rainbow Mode! Press 1 to toggle 10x Kamehameha!</div>
+<div class="power-level">Power Level: 5,000</div>
+<div class="ultra-instinct-particle-container"></div>
+
+<script>
+const goku = document.getElementById('goku');
+const kamehameha = document.getElementById('kamehameha');
+const superSaiyanAura = document.querySelector('.super-saiyan-aura');
+const kaiokenAura = document.querySelector('.kaioken-aura');
+const superSaiyanGodAura = document.querySelector('.super-saiyan-god-aura');
+const superSaiyanBlueAura = document.querySelector('.super-saiyan-blue-aura');
+const superSaiyanBlueEvolutionAura = document.querySelector('.super-saiyan-blue-evolution-aura');
+const ultraInstinctAura = document.querySelector('.ultra-instinct-aura');
+const explosion = document.querySelector('.explosion');
+const powerLevelDisplay = document.querySelector('.power-level');
+const ultraInstinctParticleContainer = document.createElement('div');
+ultraInstinctParticleContainer.className = 'ultra-instinct-particle-container';
+document.body.appendChild(ultraInstinctParticleContainer);
+let isPoweringUp = false;
+let isFireing = false;
+let isSuperSaiyan = false;
+let isSuperSaiyan2 = false;
+let isKaioken = false;
+let isJacked = false;
+let isSuperSaiyan3 = false;
+let isSuperSaiyanGod = false;
+let isSuperSaiyanBlue = false;
+let isSuperSaiyanBlueEvolution = false;
+let isUltraInstinct = false;
+let isMasteredUltraInstinct = false;
+let isRainbowMode = false; 
+let is10xKamehameha = false;
+let basePowerLevel = 5000;
+let particleInterval;
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space' && !isPoweringUp && !isFireing) {
+        powerUp();
+    } else if (event.code === 'KeyG') {
+        if (isUltraInstinct) {
+            toggleSuperSaiyan();
+        } else {
+            toggleSuperSaiyan();
+        }
+    } else if (event.code === 'KeyK') {
+        toggleKaioken();
+    } else if (event.code === 'KeyJ') {
+        toggleJacked();
+    } else if (event.code === 'KeyH') {
+        if (isSuperSaiyanBlue) {
+            toggleSuperSaiyanBlueEvolution();
+        } else {
+            toggleSuperSaiyan2();
+        }
+    } else if (event.code === 'KeyF') {
+        toggleSuperSaiyan3();
+    } else if (event.code === 'KeyC') {
+        toggleSuperSaiyanGod();
+    } else if (event.code === 'KeyB') {
+        toggleSuperSaiyanBlue();
+    } else if (event.code === 'KeyV') {
+        toggleUltraInstinct();
+    } else if (event.code === 'KeyR') { 
+        toggleRainbowMode();
+    } else if (event.code === 'Digit1') {
+        toggle10xKamehameha();
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    if (event.code === 'Space' && isPoweringUp) {
+        fire();
+    }
+});
+
+function powerUp() {
+    isPoweringUp = true;
+    goku.classList.add('powering-up');
+    updateGokuSVG(true);
+}
+
+function fire() {
+    isPoweringUp = false;
+    isFireing = true;
+    goku.classList.remove('powering-up');
+    updateGokuSVG(false, true);
+    
+    kamehameha.style.opacity = '1';
+    kamehameha.style.width = '100vw';
+    
+    if (is10xKamehameha) {
+        kamehameha.style.background = 'linear-gradient(90deg, #FF6B6B, #FF0000)';
+        kamehameha.style.boxShadow = '0 0 20px #FF0000, 0 0 40px #FF0000';
+        
+        // Update explosion gradient for 10x Kamehameha
+        const explosionGradient = document.querySelector('#explosionGradient');
+        explosionGradient.innerHTML = `
+            <stop offset="0%" stop-color="#FF0000" />
+            <stop offset="25%" stop-color="#FF3333" />
+            <stop offset="50%" stop-color="#FF6666" />
+            <stop offset="75%" stop-color="#FF9999" />
+            <stop offset="100%" stop-color="#FFCCCC" stop-opacity="0" />
+        `;
+    } else {
+        kamehameha.style.background = 'linear-gradient(90deg, #87CEFA, #1E90FF)';
+        kamehameha.style.boxShadow = 'none';
+        
+        // Reset explosion gradient for regular Kamehameha
+        const explosionGradient = document.querySelector('#explosionGradient');
+        explosionGradient.innerHTML = `
+            <stop offset="0%" stop-color="#E6FFFF" />
+            <stop offset="25%" stop-color="#B3E0FF" />
+            <stop offset="50%" stop-color="#80C1FF" />
+            <stop offset="75%" stop-color="#4DA3FF" />
+            <stop offset="100%" stop-color="#1E90FF" stop-opacity="0" />
+        `;
+    }
+    
+    setTimeout(() => {
+        explode();
+    }, 500);
+
+    setTimeout(() => {
+        kamehameha.style.opacity = '0';
+        kamehameha.style.width = '0';
+        updateGokuSVG();
+        isFireing = false;
+        is10xKamehameha = false;
+        updatePowerLevel();
+    }, 2000);
+}
+
+function explode() {
+    explosion.style.opacity = '1';
+    explosion.style.animation = 'explode 0.5s forwards';
+    
+    setTimeout(() => {
+        explosion.style.opacity = '0';
+        explosion.style.animation = 'none';
+    }, 500);
+}
+
+function toggle10xKamehameha() {
+    is10xKamehameha = !is10xKamehameha;
+    updatePowerLevel();
+}
+
+function toggleSuperSaiyan() {
+    if (isUltraInstinct) {
+        isMasteredUltraInstinct = !isMasteredUltraInstinct;
+        updateGokuSVG();
+        updatePowerLevel();
+        return;
+    }
+    if (isSuperSaiyanGod) {
+        isSuperSaiyanGod = false;
+        isSuperSaiyanBlue = true;
+    } else {
+        isSuperSaiyan = !isSuperSaiyan;
+        isSuperSaiyanBlue = false;
+    }
+    superSaiyanAura.style.opacity = isSuperSaiyan ? '1' : '0';
+    superSaiyanGodAura.style.opacity = '0';
+    superSaiyanBlueAura.style.opacity = isSuperSaiyanBlue ? '1' : '0';
+    superSaiyanBlueEvolutionAura.style.opacity = isSuperSaiyanBlueEvolution ? '1' : '0';
+    updateGokuSVG();
+    updatePowerLevel();
+    updateParticles();
+}
+
+function toggleSuperSaiyan2() {
+    if (isUltraInstinct) return; 
+    if (isSuperSaiyan) {
+        isSuperSaiyan2 = !isSuperSaiyan2;
+        updateGokuSVG();
+        updatePowerLevel();
+        updateParticles();
+    }
+}
+
+function toggleSuperSaiyan3() {
+    if (isUltraInstinct) return; 
+    if (isSuperSaiyan && isSuperSaiyan2) {
+        isSuperSaiyan3 = !isSuperSaiyan3;
+        updateGokuSVG();
+        updatePowerLevel();
+        updateParticles();
+    }
+}
+
+function toggleSuperSaiyanGod() {
+    if (isUltraInstinct) return; 
+    if (!isSuperSaiyan && !isSuperSaiyan2 && !isSuperSaiyan3) {
+        isSuperSaiyanGod = !isSuperSaiyanGod;
+        superSaiyanGodAura.style.opacity = isSuperSaiyanGod ? '1' : '0';
+        updateGokuSVG();
+        updatePowerLevel();
+        updateParticles();
+    }
+}
+
+function toggleSuperSaiyanBlue() {
+    if (isUltraInstinct) return; 
+    if (isSuperSaiyanGod) {
+        isSuperSaiyanGod = false;
+        isSuperSaiyanBlue = true;
+        superSaiyanGodAura.style.opacity = '0';
+        superSaiyanBlueAura.style.opacity = '1';
+    } else if (isSuperSaiyanBlue) {
+        isSuperSaiyanBlue = false;
+        superSaiyanBlueAura.style.opacity = '0';
+    }
+    updateGokuSVG();
+    updatePowerLevel();
+    updateParticles();
+}
+
+function toggleSuperSaiyanBlueEvolution() {
+    if (isUltraInstinct) return; 
+    if (isSuperSaiyanBlue) {
+        isSuperSaiyanBlueEvolution = !isSuperSaiyanBlueEvolution;
+        superSaiyanBlueEvolutionAura.style.opacity = isSuperSaiyanBlueEvolution ? '1' : '0';
+        updateGokuSVG();
+        updatePowerLevel();
+        updateParticles();
+    }
+}
+
+function toggleKaioken() {
+    if (isUltraInstinct) return; 
+    isKaioken = !isKaioken;
+    kaiokenAura.style.opacity = isKaioken ? '1' : '0';
+    updateGokuSVG();
+    updatePowerLevel();
+    updateParticles();
+}
+
+function toggleUltraInstinct() {
+    if (!isSuperSaiyan && !isSuperSaiyan2 && !isSuperSaiyan3 && !isKaioken && !isSuperSaiyanGod && !isSuperSaiyanBlue && !isSuperSaiyanBlueEvolution) {
+        isUltraInstinct = !isUltraInstinct;
+        if (!isUltraInstinct) {
+            isMasteredUltraInstinct = false; 
+        }
+        ultraInstinctAura.style.opacity = isUltraInstinct ? '1' : '0';
+        updateGokuSVG();
+        updatePowerLevel();
+        updateParticles();
+    } else {
+        alert("Ultra Instinct can only be toggled when all other transformations are off (except for Jacked mode).");
+    }
+}
+
+function toggleJacked() {
+    isJacked = !isJacked;
+    updateGokuSVG();
+    updatePowerLevel();
+}
+
+function toggleRainbowMode() {
+    isRainbowMode = !isRainbowMode;
+    if (isRainbowMode) {
+        startRainbowAnimation();
+    } else {
+        stopRainbowAnimation();
+    }
+    updateGokuSVG();
+    updatePowerLevel();
+}
+
+let rainbowInterval;
+
+function startRainbowAnimation() {
+    let hue = 0;
+    rainbowInterval = setInterval(() => {
+        hue = (hue + 10) % 360;
+        goku.style.filter = `hue-rotate(${hue}deg) saturate(150%) brightness(120%)`;
+    }, 100);
+}
+
+function stopRainbowAnimation() {
+    clearInterval(rainbowInterval);
+    goku.style.filter = 'none';
+}
+
+function getRainbowColor(offset = 0) {
+    const hue = (Date.now() / 20 + offset) % 360;
+    return `hsl(${hue}, 100%, 50%)`;
+}
+
+function updateGokuSVG(isPowering = false, isFiring = false) {
+    const hairColor = isMasteredUltraInstinct ? "#F0F0F0" :
+                      (isUltraInstinct ? "#000000" :
+                      (isSuperSaiyanGod ? "#FF0000" : 
+                      (isSuperSaiyanBlue ? (isSuperSaiyanBlueEvolution ? "#0080FF" : "#00FFFF") : 
+                      (isSuperSaiyan ? (isSuperSaiyan3 ? "#FFE999" : (isSuperSaiyan2 ? "#FFE700" : "#FFD700")) : "#000000"))));
+    const hairStyle = (isUltraInstinct || isSuperSaiyanGod || isSuperSaiyan || isSuperSaiyanBlue || isSuperSaiyanBlueEvolution) 
+        ? (isSuperSaiyan3
+            ? "M70 40 Q100 0 130 40 L100 300"
+            : (isSuperSaiyan2 
+                ? "M70 10 Q100 -40 130 10 M75 20 Q100 -30 125 20 M80 30 Q100 -20 120 30" 
+                : "M70 20 Q100 -30 130 20"))
+        : "M70 40 Q100 0 130 40";
+    const eyeColor = isUltraInstinct ? "#FFFFFF" :
+                     (isMasteredUltraInstinct ? "#FFFFFF" :
+                     (isSuperSaiyanGod ? "#FF0000" : 
+                     (isSuperSaiyanBlue ? "#00FFFF" : 
+                     (isSuperSaiyan ? (isSuperSaiyan3 ? "#00FFFF" : (isSuperSaiyan2 ? "#00FFFF" : "#00FF00")) : "#000000"))));
+    
+    const baseColor = "#FFA500";
+    const kaiokenColor = "#FF6347";
+    const skinColor = isKaioken ? kaiokenColor : baseColor;
+    const pantsColor = isKaioken ? "#FF0000" : "#0000FF";
+    const faceColor = isKaioken ? "#FFB6C1" : "#FFD700"; 
+
+    let armStyle = "";
+    const armWidth = isJacked ? 25 : 20;
+    
+    if (isPowering) {
+        armStyle = `
+            <path d="M70 120 Q40 140 20 160" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+            <path d="M130 120 Q160 140 180 160" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        `;
+    } else if (isFiring) {
+        armStyle = `
+            <path d="M70 120 Q20 130 10 150" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+            <path d="M130 120 Q180 130 190 150" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        `;
+    } else {
+        armStyle = `
+            <path d="M70 120 Q40 140 30 180" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+            <path d="M130 120 Q160 140 170 180" fill="none" stroke="${skinColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        `;
+    }
+
+    const bodyOffset = isJacked ? 10 : 0;
+    const headOffset = isJacked ? 5 : 0;
+    const shoulderRadius = isJacked ? 20 : 0;
+
+    let bodyPath = isJacked
+        ? `M100 ${50 - bodyOffset} 
+           Q${130 + bodyOffset} ${80 - (isJacked ? 5 : 0)} ${130 + bodyOffset} 120 
+           Q${130 + bodyOffset} ${160 + bodyOffset} 100 ${190 + bodyOffset} 
+           Q${70 - bodyOffset} ${160 + bodyOffset} ${70 - bodyOffset} 120 
+           Q${70 - bodyOffset} ${80 - (isJacked ? 5 : 0)} 100 ${50 - bodyOffset}`
+        : `M100 ${50 - bodyOffset} 
+           Q${130 + bodyOffset} ${80 - (isJacked ? 5 : 0)} ${130 + bodyOffset} 120 
+           Q${130 + bodyOffset} ${160 + bodyOffset} 100 ${190 + bodyOffset} 
+           Q${70 - bodyOffset} ${160 + bodyOffset} ${70 - bodyOffset} 120 
+           Q${70 - bodyOffset} ${80 - (isJacked ? 5 : 0)} 100 ${50 - bodyOffset}`;
+
+    let shoulders = isJacked
+        ? `<circle cx="${70 - bodyOffset}" cy="120" r="${shoulderRadius}" fill="${skinColor}"/>
+           <circle cx="${130 + bodyOffset}" cy="120" r="${shoulderRadius}" fill="${skinColor}"/>`
+        : '';
+
+    goku.innerHTML = `
+    <svg width="200" height="300" viewBox="0 0 200 300">
+        ${isSuperSaiyan3 ? `<path d="M70 40 Q100 -50 130 40 L100 300 Q130 150 160 300 M40 40 Q70 -50 100 40 L70 300" fill="${hairColor}" />` : ''}
+        <path d="${bodyPath}" fill="${skinColor}"/>
+        ${shoulders}
+        <circle cx="100" cy="${40 - headOffset}" r="${isJacked ? 35 : 30}" fill="${faceColor}"/>
+        ${!isSuperSaiyan3 ? `<path d="${hairStyle}" fill="${hairColor}"/>` : ''}
+        <circle cx="90" cy="${35 - headOffset}" r="5" fill="${eyeColor}"/>
+        <circle cx="110" cy="${35 - headOffset}" r="5" fill="${eyeColor}"/>
+        <path d="M95 ${50 - headOffset} Q100 ${55 - headOffset} 105 ${50 - headOffset}" fill="none" stroke="#000000" stroke-width="2"/>
+        ${armStyle}
+        <path d="M90 ${190 + bodyOffset} Q85 240 80 290" fill="none" stroke="${pantsColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        <path d="M110 ${190 + bodyOffset} Q115 240 120 290" fill="none" stroke="${pantsColor}" stroke-width="${armWidth}" stroke-linecap="round"/>
+        ${(isSuperSaiyan2 || isSuperSaiyan3) ? '<path d="M60 30 L70 40 M140 30 L130 40" stroke="' + hairColor + '" stroke-width="2"/>' : ''}
+    </svg>`;
+
+    if (isRainbowMode) {
+        goku.style.filter = 'none'; 
+    } else if (isKaioken) {
+        goku.style.filter = "sepia(50%) saturate(500%) hue-rotate(-20deg)";
+    } else {
+        goku.style.filter = "none";
+    }
+}
+
+function updatePowerLevel() {
+    let powerLevel = basePowerLevel;
+    if (isMasteredUltraInstinct) {
+        powerLevel *= 25000000; 
+    } else if (isUltraInstinct) {
+        powerLevel *= 2000000; 
+    } else if (isSuperSaiyanGod) {
+        powerLevel *= 1000; 
+    } else if (isSuperSaiyanBlue) {
+        powerLevel *= 50000;
+        if (isSuperSaiyanBlueEvolution) {
+            powerLevel *= 20; 
+        }
+    } else if (isSuperSaiyan) {
+        if (isSuperSaiyan3) powerLevel *= 400;
+        else if (isSuperSaiyan2) powerLevel *= 100;
+        else powerLevel *= 50;
+    }
+    if (isKaioken) powerLevel *= 2;
+    if (isJacked) powerLevel *= 1.5;
+    if (isRainbowMode) powerLevel *= 2; 
+    if (is10xKamehameha) powerLevel *= 10;
+
+    let formattedPowerLevel = powerLevel >= 1e9 
+        ? powerLevel.toExponential(2) 
+        : powerLevel.toLocaleString();
+    
+    powerLevelDisplay.textContent = `Power Level: ${formattedPowerLevel}`;
+}
+
+function createParticle() {
+    if (isSuperSaiyanGod || isSuperSaiyanBlue || isRainbowMode) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = isSuperSaiyanBlueEvolution ? Math.random() * 10 + 10 : Math.random() * 5 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        const gokuRect = goku.getBoundingClientRect();
+        const x = Math.random() * gokuRect.width + gokuRect.left;
+        const y = gokuRect.bottom;
+        
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        
+        if (isRainbowMode) {
+            particle.style.backgroundColor = getRainbowColor(Math.random() * 360);
+        } else if (isSuperSaiyanBlue) {
+            if (isSuperSaiyanBlueEvolution) {
+                particle.style.backgroundColor = `rgb(0, ${Math.floor(Math.random() * 100) + 100}, 255)`;
+            } else {
+                particle.style.backgroundColor = `rgb(0, ${Math.floor(Math.random() * 100) + 155}, 255)`;
+            }
+        } else if (isSuperSaiyanGod) {
+            particle.style.backgroundColor = `rgb(255, ${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 50)})`;
+        }
+        
+        const duration = isSuperSaiyanBlueEvolution ? Math.random() * 1.5 + 1.5 : Math.random() * 1 + 1;
+        particle.style.animation = `particleAnimation ${duration}s linear`;
+        
+        document.body.appendChild(particle);
+        
+        particle.addEventListener('animationend', () => {
+            particle.remove();
+        });
+        return;
+    }
+
+    if (isSuperSaiyan2 || isSuperSaiyan3) {
+        createElectricParticle();
+        return;
+    }
+
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 5 + 5;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    const gokuRect = goku.getBoundingClientRect();
+    const x = Math.random() * gokuRect.width + gokuRect.left;
+    const y = gokuRect.bottom;
+    
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    
+    if (isSuperSaiyan) {
+        particle.style.backgroundColor = `rgb(255, ${Math.floor(Math.random() * 50) + 200}, 0)`;
+    } else if (isKaioken) {
+        particle.style.backgroundColor = `rgb(255, ${Math.floor(Math.random() * 50)}, 0)`;
+    }
+    
+    particle.style.animation = `particleAnimation ${Math.random() * 1 + 1}s linear`;
+    
+    document.body.appendChild(particle);
+    
+    particle.addEventListener('animationend', () => {
+        particle.remove();
+    });
+}
+
+function createElectricParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'electric-particle';
+    
+    const gokuRect = goku.getBoundingClientRect();
+    const x = Math.random() * gokuRect.width + gokuRect.left;
+    const y = Math.random() * gokuRect.height + gokuRect.top;
+    
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    
+    const tx = (Math.random() - 0.5) * 100;
+    const ty = (Math.random() - 0.5) * 100;
+    const rot = (Math.random() - 0.5) * 180;
+    
+    particle.style.setProperty('--tx', `${tx}px`);
+    particle.style.setProperty('--ty', `${ty}px`);
+    particle.style.setProperty('--rot', `${rot}deg`);
+    
+    if (isRainbowMode) {
+        particle.style.backgroundColor = getRainbowColor(Math.random() * 360);
+    }
+    
+    particle.style.animation = `electricParticleAnimation ${Math.random() * 0.5 + 0.5}s linear`;
+    
+    document.body.appendChild(particle);
+    
+    particle.addEventListener('animationend', () => {
+        particle.remove();
+    });
+}
+
+function createUltraInstinctParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'ultra-instinct-particle';
+    
+    const gokuRect = goku.getBoundingClientRect();
+    const centerX = gokuRect.left + gokuRect.width / 2;
+    const centerY = gokuRect.top + gokuRect.height / 2;
+    
+    particle.style.left = `${centerX}px`;
+    particle.style.top = `${centerY}px`;
+    
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 150 + 50; 
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+
+    const baseSize = isMasteredUltraInstinct ? 24 : 12;
+    const size = baseSize + (Math.random() * 6);
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    particle.style.setProperty('--tx', `${tx}px`);
+    particle.style.setProperty('--ty', `${ty}px`);
+    
+    if (isRainbowMode) {
+        particle.style.backgroundColor = getRainbowColor(Math.random() * 360);
+    } else {
+        const hue = Math.floor(Math.random() * 60) + 180;
+        const saturation = Math.floor(Math.random() * 20) + 80;
+        const lightness = Math.floor(Math.random() * 20) + 60;
+        particle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    }
+    
+    particle.style.animation = `ultraInstinctParticleAnimation ${Math.random() * 0.5 + 1}s linear`;
+    
+    ultraInstinctParticleContainer.appendChild(particle);
+    
+    particle.addEventListener('animationend', () => {
+        particle.remove();
+    });
+}
+
+function updateParticles() {
+    clearInterval(particleInterval);
+    if (isUltraInstinct || isSuperSaiyan || isKaioken || isSuperSaiyan2 || isSuperSaiyan3 || isSuperSaiyanGod || isSuperSaiyanBlue || isSuperSaiyanBlueEvolution || isRainbowMode) {
+        const interval = isSuperSaiyanBlueEvolution ? 30 : (isUltraInstinct ? 20 : 50);
+        particleInterval = setInterval(() => {
+            if (isUltraInstinct) {
+                for (let i = 0; i < 5; i++) {
+                    createUltraInstinctParticle();
+                }
+            } else {
+                createParticle();
+            }
+        }, interval);
+    }
+}
+
+updatePowerLevel();
+</script>
+</body></html>
